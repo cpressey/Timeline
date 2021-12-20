@@ -221,7 +221,6 @@ class Timeline:
 
         # create eras
         eras_data = self.data['eras']
-        markers = {}
         for era in eras_data:
 
             # extract era data
@@ -273,7 +272,6 @@ class Timeline:
 
         # create eras
         eras_data = self.data[nsub*'sub'+'eras']
-        markers = {}
         for era in eras_data:
 
             # extract era data
@@ -396,7 +394,6 @@ class Timeline:
         self.ticks[(label, x)] = fill
 
     def draw_axis_labels(self):
-        min_y = 0
         level = 0
         writing_mode = self.data.get('tick_orientation', 'tb')
 
@@ -435,13 +432,10 @@ class Timeline:
                 tick = self.svg_groups['tick_labels'].add(line)
                 tick.dasharray([3, 3])
 
-            h = text_width + y
-
         return
 
 
     def create_callouts(self):
-        min_y = float('inf')
         if 'callouts' not in self.data:
             return 0
         callouts_data = self.data['callouts']
