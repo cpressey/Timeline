@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 import parsedatetime
@@ -158,7 +158,7 @@ class Timeline:
         self.create_era_axis_labels()
 
         # create suberas and labels using axis height and overall height
-        print >>sys.stderr,"Allowing for",self.maxsuberas,"sub-eras"
+        sys.stderr.write("Allowing for {} sub-eras\n".format(self.maxsuberas))
         for i in range(1,self.maxsuberas+1):
             self.create_suberas((i+1)*y_era, y_axis, height-(i+1)*y_era, nsub=i)
             self.create_subera_axis_labels(nsub=i)
@@ -183,12 +183,8 @@ class Timeline:
         self.drawing.add(global_group)
 
         # finally set the height on the drawing
-        self.drawing['height'] = height
-        ""
         self.drawing['height'] = int(self.drawing['width']*3/4.)  # ignore height
-        print >>sys.stderr, "Height:",self.drawing['height']
-        print >>sys.stderr, "width:",self.drawing['width']
-        ""
+        sys.stderr.write("Height: {} Width: {}\n".format(self.drawing['height'], self.drawing['width']))
 
     def save(self, filename):
         self.drawing.saveas(filename)
@@ -268,9 +264,9 @@ class Timeline:
 
     def create_suberas(self, y_era, y_axis, height, nsub=1):
         if nsub*'sub'+'eras' not in self.data:
-            print >>sys.stderr, "No sub-eras',nsub,', no problem"
+            sys.stderr.write("No sub-eras {}, no problem\n".format(nsub))
             return
-        print >>sys.stderr, "Got",nsub*'sub'+'eras'
+        sys.stderr.write("Got {}eras\n".format(nsub*'sub'))
 
         # create eras
         eras_data = self.data[nsub*'sub'+'eras']
@@ -532,4 +528,4 @@ if __name__ == '__main__':
         sys.exit(-1)
     timeline = Timeline(filename)
     timeline.build()
-    print(timeline.to_string().encode('utf-8'))
+    print(timeline.to_string())

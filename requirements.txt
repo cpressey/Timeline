@@ -1,0 +1,3 @@
+git+https://github.com/bear/parsedatetime.git@v3.0#egg=parsedatetime
+svgwrite==1.4.1
+# NOTE tkinter must also be installed: sudo apt-get install python3-tk
