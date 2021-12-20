@@ -25,6 +25,9 @@ class Colors:
     gray = '#C0C0C0'
 
 
+PADDING_FACTOR = 0.1
+
+
 class Leveler():
 
     def __init__(self, width=10, height=15, increment=10, spacing_x=3):
@@ -110,7 +113,7 @@ class Timeline:
         self.start_date = self.datetime_from_string(self.data['start'])
         self.end_date = self.datetime_from_string(self.data['end'])
         delta = self.end_date - self.start_date
-        padding = datetime.timedelta(seconds=0.1 * delta.total_seconds())
+        padding = datetime.timedelta(seconds=PADDING_FACTOR * delta.total_seconds())
         self.date0 = self.start_date - padding
         self.date1 = self.end_date + padding
         self.total_secs = (self.date1 - self.date0).total_seconds()
